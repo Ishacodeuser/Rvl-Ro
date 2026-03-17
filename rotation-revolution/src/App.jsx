@@ -8,10 +8,13 @@ function SolarSystem() {
     const sunRef = useRef(null);
     const earthOrbitRef = useRef(null);
     const earthRef = useRef(null);
-    const moonOrbitRef = useRef(null);
     const moonRef = useRef(null);
-    const sunTexture = useLoader(TextureLoader, "/textures/sun.png")
-
+    const moonOrbitRef = useRef(null);
+    const [moonTexture, earthTexture, sunTexture] = useLoader(TextureLoader, [
+        '/textures/moon.jpg',
+        '/textures/earth.jpeg',
+        '/textures/sun.png',
+    ]);
     useFrame((state) => {
         const t = state.clock.getElapsedTime();
 
@@ -45,7 +48,7 @@ function SolarSystem() {
                 <group rotation={[0, 0, 0.41]}>
                     <mesh ref={earthRef}>
                         <sphereGeometry args={[0.7, 32, 32]} />
-                        <meshStandardMaterial color="#2a5c2a" />
+                        <meshStandardMaterial map={earthTexture} />
                     </mesh>
                 </group>
 
@@ -53,7 +56,7 @@ function SolarSystem() {
                     <group ref={moonOrbitRef}>
                         <mesh ref={moonRef}>
                             <sphereGeometry args={[0.3, 32, 32]} />
-                            <meshStandardMaterial color="#aaaaaa"  />
+                            <meshStandardMaterial map={moonTexture} />
                         </mesh>
                     </group>
                 </group>
